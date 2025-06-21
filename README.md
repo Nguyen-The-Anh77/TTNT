@@ -1,11 +1,13 @@
 # Emotion Recognition
+
 Ứng dụng sẽ dự đoán cảm xúc của bạn từ webcam và hiện thị trạng thái đồng thời lên khung hình.
 
-<p align="center">
+<!-- <p align="center">
 	<img src="https://media1.giphy.com/media/J11DaTiOI7a9BtkxG0/giphy.gif?cid=790b76110e10226fb5d26ed94c18522b30e1126c15ba0804&rid=giphy.gif&ct=g" />
-</p>
+</p> -->
 
 # How it work
+
 Những ứng dụng dự đoán cảm xúc, dự đoán tuổi, dự đoán giới tính... bây giờ đã không còn quá xa lạ với mọi người. Thậm chí thư viện `deepface` còn giúp chúng ta thực hiện những việc tưởng chừng khó khăn đó chỉ với duy nhất một dòng code:
 
 ```python
@@ -19,6 +21,7 @@ obj = DeepFace.analyze(img_path = "img4.jpg", actions = ['age', 'gender', 'race'
 Nhưng để tìm hiểu sâu hơn cách thức những dòng code này hoạt động thì trong bài viết này chúng ta sẽ đi từ huấn luyện mô hình đến xây dựng ứng dụng nhận diện cảm xúc theo thời gian thực.
 
 ## Huấn luyện mô hình
+
 ### Bước 1. Nạp các thư việc cần thiết cho quá trình huấn luyện
 
 ```python
@@ -66,7 +69,7 @@ def load_fer2013():
         data = pd.read_csv(dataset_path)
         pixels = data['pixels'].tolist()
         width, height = image_size
-        
+
         faces = []
         for pixel_sequence in pixels:
             face = [int(pixel) for pixel in pixel_sequence.split(' ')]
@@ -88,7 +91,7 @@ def preprocess_input(x, v2=True):
 ```
 
 ```python
- faces, emotions = load_fer2013() 
+ faces, emotions = load_fer2013()
 faces = preprocess_input(faces)
 num_samples, num_classes = emotions.shape
 ```
@@ -194,16 +197,19 @@ model.fit_generator(data_generator.flow(xtrain, ytrain, batch_size),
 </p>
 
 ## Viết chương trình nhận diện khuôn mặt và dự đoán cảm xúc
+
 Xong các bước trên là chúng ta đã có 1 mô hình dự đoán cảm xúc, công việc bây giờ là đưa nào vào trong ứng dụng của mình để dự đoán.
 
 Các bước để thực hiện sẽ là:
-- Nhận diện khuôn mặt bằng Cascade Classifier
-- Cắt khu vực ảnh đó và xử lý đầu vào phù hợp như ảnh đầu vào của mô hình chúng ta huấn luyện ở trên (có kích thước 48x48)
-- Dùng model dự đoán cảm xúc của khuôn mặt và hiển thị nó ra
+
+-   Nhận diện khuôn mặt bằng Cascade Classifier
+-   Cắt khu vực ảnh đó và xử lý đầu vào phù hợp như ảnh đầu vào của mô hình chúng ta huấn luyện ở trên (có kích thước 48x48)
+-   Dùng model dự đoán cảm xúc của khuôn mặt và hiển thị nó ra
 
 Chi tiết code tại [app.py]
 
 # Installation
+
 Để khởi cài đặt các thư viện cần thiết các bạn chỉ cần cài đặt `requirements.txt`:
 
 ```
@@ -211,6 +217,7 @@ pip install requirements.txt
 ```
 
 # Usage
+
 Để khởi chạy ứng dụng:
 
 ```
@@ -231,9 +238,10 @@ python gradio-app.py
 
 Kết quả cuối cùng:
 
-<p align="center">
+<!-- <p align="center">
 	<img src="https://media1.giphy.com/media/J11DaTiOI7a9BtkxG0/giphy.gif?cid=790b76110e10226fb5d26ed94c18522b30e1126c15ba0804&rid=giphy.gif&ct=g" />
-</p>
+</p> -->
 
 # Summary
-Kể cả đối với chúng ta thì việc nhận biết cảm xúc của người khác cũng không phải lúc nào cũng chính xác 100% đặc biệt là những biểu cảm khó phân biệt nên chỉ nhìn vào 1 bức ảnh như KINH NGẠC hoặc SỢ HÃI... Model với độ chính xác chỉ 65% của chúng ta thì việc nhận diện nhầm những cảm xúc đó cũng khá dễ hiểu, thay vào đó nó dễ dàng nhận diện 2 cảm xúc có sự khác biệt rõ ràng nhất đó là HẠNH PHÚC và BÌNH THƯỜNG."# AI-nh-n-di-ncmxc"  
+
+Kể cả đối với chúng ta thì việc nhận biết cảm xúc của người khác cũng không phải lúc nào cũng chính xác 100% đặc biệt là những biểu cảm khó phân biệt nên chỉ nhìn vào 1 bức ảnh như KINH NGẠC hoặc SỢ HÃI... Model với độ chính xác chỉ 65% của chúng ta thì việc nhận diện nhầm những cảm xúc đó cũng khá dễ hiểu, thay vào đó nó dễ dàng nhận diện 2 cảm xúc có sự khác biệt rõ ràng nhất đó là HẠNH PHÚC và BÌNH THƯỜNG."# AI-nh-n-di-ncmxc"
