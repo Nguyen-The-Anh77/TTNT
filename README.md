@@ -232,9 +232,9 @@ python app.py
 python gradio-app.py
 ```
 
-<p align="center">
+<!-- <p align="center">
 	<img src="https://i.imgur.com/VcX9nOs.png" />
-</p>
+</p> -->
 
 Kết quả cuối cùng:
 
